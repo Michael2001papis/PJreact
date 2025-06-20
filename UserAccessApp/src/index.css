@@ -1,13 +1,10 @@
 
 /*-(ייבוא הגדרות בסיס של Tailwind CSS)-*/
 @tailwind base;
-
 /*-(ייבוא רכיבי עיצוב מותאמים מראש של Tailwind)-*/
 @tailwind components;
-
 /*-(ייבוא כלי עזר שימושיים של Tailwind)-*/
 @tailwind utilities;
-
 /*-(עיצוב גלילה של גוף הדף - מניעת גלילה אופקית והגבלת אנכית)-*/
 body {
   overflow-x: hidden;
@@ -15,10 +12,3 @@ body {
 }
 /*--*/
 
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
-body {
-  overflow-x: hidden;
-  overflow-y: scroll;
-} */
