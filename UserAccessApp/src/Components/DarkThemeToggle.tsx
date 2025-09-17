@@ -23,13 +23,13 @@ const DarkThemeToggle = () => {
   return (
     <button
       onClick={() => setIsDark((prev) => !prev)}
-      className={`relative w-12 h-6 flex items-center rounded-full p-1 transition-colors duration-300 ${
-        isDark ? "bg-gray-700" : "bg-gray-300"
+      className={`relative w-14 h-7 flex items-center rounded-full p-1 transition-all duration-500 hover:scale-110 ${
+        isDark ? "bg-gradient-to-r from-purple-600 to-blue-600" : "bg-gradient-to-r from-yellow-400 to-orange-500"
       }`}
     >
       <div
-        className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
-          isDark ? "translate-x-6" : "translate-x-0"
+        className={`w-5 h-5 bg-white rounded-full shadow-lg transform transition-all duration-500 hover:animate-rotate ${
+          isDark ? "translate-x-7" : "translate-x-0"
         }`}
       />
       <span className="sr-only">Toggle Theme</span>

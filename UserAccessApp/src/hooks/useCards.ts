@@ -2,32 +2,26 @@
 // hooks/useCards.ts..
 /*-(ייבוא הוקים לניהול מצב ואפקט ב-React)-*/
 import { useEffect, useState } from "react";
-/*-(ייבוא טיפוס Card מה-API המקומי)-*/
-import { Card } from "../API/cards";
-/*-(כתובת ה-API שממנו נמשוך את הכרטיסים)-*/
-const API_ENDPOINT = "https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards";
-/*-(הוק מותאם אישית: useCards - אחראי לשליפת כרטיסים מהשרת)-*/
+/*-(ייבוא טיפוס Card ופונקציה מה-API המקומי)-*/
+import { Card, fetchCards } from "../API/cards";
+/*-(הוק מותאם אישית: useCards - אחראי לשליפת כרטיסים מקומיים)-*/
 export const useCards = () => {
   /*-(סטייטים לניהול נתוני הכרטיסים ומצב טעינה)-*/
   const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  /*-(אפקט ריצה חד פעמית לשליפת הנתונים עם טיפול בשגיאות)-*/
+  /*-(אפקט ריצה חד פעמית לשליפת הנתונים המקומיים)-*/
   useEffect(() => {
-    const fetchCards = async () => {
+    const loadCards = async () => {
       try {
-        const response = await fetch(API_ENDPOINT);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data: Card[] = await response.json();
+        const data = await fetchCards();
         setCards(data);
       } catch (err) {
-        console.error("Error fetching cards:", err);
+        console.error("Error loading cards:", err);
       } finally {
         setLoading(false);
       }
     };
-    fetchCards();
+    loadCards();
   }, []);
   /*-(ההוק מחזיר את המידע והסטטוס לשימוש ברכיבים אחרים)-*/
   return { cards, loading };

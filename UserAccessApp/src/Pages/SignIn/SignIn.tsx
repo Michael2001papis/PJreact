@@ -7,8 +7,8 @@ import Joi from "joi";
 import { useAppDispatch } from "../../store";
 import { login } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useState } from "react";
+import { loginUser } from "../../API/users";
 /*-(הגדרת מבנה שדות הטופס)-*/
 interface SignInForm {
   username: string;
@@ -32,28 +32,21 @@ const SignIn = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  /*-(פונקציית שליחה - טיפול בהתחברות, שמירת טוקן וזיהוי סוג משתמש)-*/
+  /*-(פונקציית שליחה - טיפול בהתחברות מקומית)-*/
   const onSubmit = async (data: SignInForm) => {
     setLoading(true);
     try {
-      const response = await fetch("https://monkfish-app-z9uza.ondigitalocean.app/bcard2/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: data.username, password: data.password }),
-      });
-      if (!response.ok) throw new Error("Invalid credentials");
-      const token = await response.text();
-      const decodedUser = jwtDecode<JwtPayload & { _id: string; isBusiness: boolean; isAdmin: boolean }>(token);
-      const role = decodedUser.isAdmin
-        ? "admin"
-        : decodedUser.isBusiness
-        ? "business"
-        : "user";
-      dispatch(login({ username: data.username, role }));
-      navigate("/home");
+      const result = await loginUser(data.username, data.password);
+      
+      if (result.success && result.user) {
+        dispatch(login({ username: result.user.email, role: result.user.role }));
+        navigate("/home");
+      } else {
+        alert(`שגיאה בהתחברות: ${result.error || "פרטי התחברות לא נכונים"}`);
+      }
     } catch (error) {
-      const msg = error instanceof Error ? error.message : "An unknown error occurred";
-      alert(`Login failed: ${msg}`);
+      const msg = error instanceof Error ? error.message : "שגיאה לא ידועה";
+      alert(`שגיאה בהתחברות: ${msg}`);
     } finally {
       setLoading(false);
     }

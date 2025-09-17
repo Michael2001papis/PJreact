@@ -20,10 +20,10 @@ const ScrollToTopButton = () => {
     show && (
       <button
         onClick={scrollUp}
-        className="fixed bottom-5 right-5 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition"
+        className="fixed bottom-6 right-6 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white shadow-2xl transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-600 hover:scale-110 hover:animate-float z-50"
         title="גלול למעלה"
       >
-        <FaArrowUp />
+        <FaArrowUp className="text-lg animate-bounce-slow" />
       </button>
     )
   );
