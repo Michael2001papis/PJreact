@@ -9,7 +9,7 @@ import MyCards from "./Pages/MyCards/MyCards";
 import Settings from "./Pages/Settings/Settings";
 import Header from "./Components/Header";
 /*-(ייבוא state מה־store של Redux)-*/
-import { useAppSelector } from "./store";
+import { useAppSelector, RootState } from "./store";
 /*-(ייבוא דפים נוספים בפרויקט)-*/
 import Copyright from "./Pages/Copyright";
 import Favorites from "./Pages/Favorites";
@@ -21,7 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 /*-(קומפוננטת השורש של האפליקציה)-*/
 function App() {
   /*-(שליפת המשתמש מה־store כדי לבדוק הרשאות גישה)-*/
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state: RootState) => state.auth.user);
   return (
     <div>
       {/*-(תפריט עליון עם פונקציית חיפוש)-*/}

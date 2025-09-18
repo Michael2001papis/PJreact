@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
-import { useAppSelector } from "../../store";
+import { useAppSelector, RootState } from "../../store";
 import { toast } from "react-toastify";
 import { FaEdit, FaTrash, FaShieldAlt, FaUndo, FaUser, FaPhone, FaMapMarkerAlt, FaEnvelope, FaCrown, FaBriefcase, FaUserTie } from "react-icons/fa";
 /*-(הגדרת מבנה הנתונים של טופס הפרופיל)-*/
@@ -31,7 +31,7 @@ const schema = Joi.object<ProfileForm>({
 /*-(קומפוננטת Profile - טופס ניהול פרופיל אישי כולל עריכה, מחיקה, ואיפוס)-*/
 function Profile() {
   /*-(שליפת המשתמש מהסטייט והגדרת מצבים שונים בקומפוננטה)-*/
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state: RootState) => state.auth.user);
   const [editMode, setEditMode] = useState(false);
   const [showPermissionsModal, setShowPermissionsModal] = useState(false);
   const [profileData, setProfileData] = useState<ProfileForm>(() => {

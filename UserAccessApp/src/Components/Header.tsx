@@ -2,7 +2,7 @@
 // Components/Header.tsx..
 /*-(ייבוא ספריות וכלים חיוניים עבור ה-Header)-*/
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector, RootState } from "../store";
 import { logout } from "../store/slices/authSlice";
 import DarkThemeToggle from "./DarkThemeToggle";
 import { useState } from "react";
@@ -11,7 +11,7 @@ export default function Header({ onSearch }: { onSearch: (term: string) => void 
   /*-(משתנים וסטייטים לניהול משתמש, ניתוב וחיפוש)-*/
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.auth.user);
+  const user = useAppSelector((state: RootState) => state.auth.user);
   const [searchTerm, setSearchTerm] = useState("");
   /*-(פונקציה להתנתקות מהמערכת ומעבר למסך ההתחברות)-*/
   const handleLogout = () => {
