@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "cd UserAccessApp && npm run build",
+  "outputDirectory": "UserAccessApp/dist",
+  "ignoreCommand": "echo 'Using Vercel defaults'"
+}
+
+

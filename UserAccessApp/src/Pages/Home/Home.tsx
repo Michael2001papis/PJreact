@@ -25,7 +25,7 @@ const Home = () => {
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [adminMode, setAdminMode] = useState(false);
-  const [selectedCards, setSelectedCards] = useState<Set<string>>(new Set());
+  const [selectedCards, setSelectedCards] = useState<Set<number>>(new Set());
   /*-(שליפת כרטיסים מקומיים עם טיפול בשגיאות והצגת Toast)-*/
   useEffect(() => {
     const loadCards = async () => {
