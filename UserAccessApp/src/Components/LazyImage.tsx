@@ -1,22 +1,25 @@
+// Components/LazyImage.tsx
+/*-(ייבוא ספריות React לניהול מצב ורפרנסים)-*/
 import React, { useState, useRef, useEffect } from 'react';
-
+/*-(הגדרת Props עבור רכיב תמונה עם טעינה עצלנית)-*/
 interface LazyImageProps {
   src: string;
   alt: string;
   className?: string;
   placeholder?: string;
 }
-
+/*-(רכיב תמונה חכם עם טעינה עצלנית - טוען תמונות רק כשהן נכנסות לתצוגה)-*/
 const LazyImage: React.FC<LazyImageProps> = ({ 
   src, 
   alt, 
   className = "", 
   placeholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect width='400' height='200' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af'%3ELoading...%3C/text%3E%3C/svg%3E"
 }) => {
+  /*-(ניהול מצבי טעינה ונראות התמונה)-*/
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-
+  /*-(שימוש ב-Intersection Observer כדי לזהות כאשר התמונה נכנסת לתצוגה)-*/
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -34,7 +37,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
 
     return () => observer.disconnect();
   }, []);
-
+  /*-(רינדור תמונה עם אפקט טעינה חלק ואנימציה)-*/
   return (
     <div className="relative overflow-hidden">
       {!isLoaded && isInView && (
@@ -51,5 +54,5 @@ const LazyImage: React.FC<LazyImageProps> = ({
     </div>
   );
 };
-
+/*-(ייצוא רכיב LazyImage לשימוש בפרויקט)-*/
 export default LazyImage;

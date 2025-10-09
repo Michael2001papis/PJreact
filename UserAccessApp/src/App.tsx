@@ -24,12 +24,12 @@ function App() {
   const user = useAppSelector((state: RootState) => state.auth.user);
   return (
     <div>
-      {/*-(תפריט עליון עם פונקציית חיפוש)-*/}
-      <Header onSearch={(term) => {
-        console.log("Search term:", term); 
-      }} />
-      {/*-(הגדרת נתיבי הניווט באפליקציה לפי React Router)-*/}
-      <Routes>
+        {/*-(תפריט עליון עם פונקציית חיפוש)-*/}
+        <Header onSearch={(term) => {
+          console.log("Search term:", term); 
+        }} />
+        {/*-(הגדרת נתיבי הניווט באפליקציה לפי React Router)-*/}
+        <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={user ? <Profile /> : <Navigate to="/signin" />} />
